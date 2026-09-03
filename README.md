@@ -8,6 +8,8 @@ A word puzzle game built with Flutter. Unscramble letters to form words against 
 - **Timer + scoring** - Speed bonuses and streak multipliers reward quick, consistent play
 - **Stats tracking** - Lifetime games, words found, best score, and best streak
 - **Dark / Light theme** - Toggleable appearance
+- **Daily Challenge** - Same 5-word puzzle for everyone each day
+- **Multiplayer battles** - Host or join a room, race a friend in real time
 - **Flutter Web** - Runs on Android, iOS, and web
 
 ## Tech Stack
@@ -52,6 +54,41 @@ flutter build web
 flutter test
 ```
 
+## Multiplayer Server
+
+Real-time matches run on a Node.js WebSocket server. The server is the
+source of truth for words, scoring, and winners.
+
+### Prerequisites
+
+- Node.js (>= 18)
+
+### Run the server
+
+```bash
+cd server
+npm install
+npm start
+```
+
+The server listens on `ws://localhost:8080` by default. Set the `PORT`
+environment variable to use a different port.
+
+### Run server tests
+
+```bash
+cd server
+npm test
+```
+
+### How to play multiplayer
+
+1. Start the server and the Flutter app.
+2. On one device, tap **Multiplayer**, enter a name, and tap **Create room**.
+3. Share the 6-letter room code with a friend.
+4. On the other device, tap **Multiplayer**, enter the code, and tap **Join room**.
+5. Both players get the same scrambled word each round and race to solve it.
+
 ## Project Structure
 
 ```
@@ -66,6 +103,7 @@ lib/
 │   │   ├── domain/          # Models, scoring, scramble logic
 │   │   └── presentation/    # Providers, screens, widgets
 │   ├── home/                # Landing screen
+│   ├── multiplayer/         # Online battles (lobby + battle screens)
 │   ├── stats/               # Lifetime statistics
 │   └── settings/            # Theme preference
 ├── shared/                  # Shared widgets
