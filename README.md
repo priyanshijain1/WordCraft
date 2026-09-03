@@ -1,44 +1,48 @@
 # WordCraft
 
-A word puzzle game built with Flutter. Unscramble letters to form words against the clock, build streaks, and chase your best score.
+![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart)
+![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)
+![Platform](https://img.shields.io/badge/platform-Web-blue)
+![Multiplayer](https://img.shields.io/badge/multiplayer-WebSocket-orange)
+
+A real-time multiplayer word scramble game. Unscramble letters against the
+clock, build streaks, take on the daily puzzle, or battle a friend live over
+WebSockets.
 
 ## Features
 
-- **Word Scramble** - Tap scrambled letters to form the correct word before time runs out
-- **Timer + scoring** - Speed bonuses and streak multipliers reward quick, consistent play
-- **Stats tracking** - Lifetime games, words found, best score, and best streak
-- **Dark / Light theme** - Toggleable appearance
-- **Daily Challenge** - Same 5-word puzzle for everyone each day
-- **Multiplayer battles** - Host or join a room, race a friend in real time
-- **Flutter Web** - Runs on Android, iOS, and web
+| Mode | Description |
+|------|-------------|
+| **Classic** | 8 words, 30 seconds each. Speed bonuses + streak multipliers |
+| **Daily Challenge** | Same 5-word puzzle for everyone, every day (date-seeded) |
+| **Multiplayer** | Host or join a room with a 6-letter code, race in real time |
+| **Stats** | Lifetime games, words found, best score, best streak |
+| **Theme** | Dark / light toggle |
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|------------|
-| Framework | Flutter 3.x |
+| Framework | Flutter 3.x (Web) |
 | State management | Riverpod 2.x |
 | Navigation | go_router |
 | Persistence | shared_preferences |
 | Typography | google_fonts |
+| Multiplayer server | Node.js + `ws` |
+| Realtime protocol | JSON over WebSocket |
 
 ## Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (>= 3.0)
-- Chrome (for Flutter Web)
+- Flutter SDK (>= 3.0) + Chrome for web
+- Node.js (>= 18) for the multiplayer server
 
 ### Run the app
 
 ```bash
 flutter pub get
-flutter run
-```
-
-### Run on web
-
-```bash
 flutter run -d chrome
 ```
 
@@ -48,22 +52,7 @@ flutter run -d chrome
 flutter build web
 ```
 
-### Run tests
-
-```bash
-flutter test
-```
-
-## Multiplayer Server
-
-Real-time matches run on a Node.js WebSocket server. The server is the
-source of truth for words, scoring, and winners.
-
-### Prerequisites
-
-- Node.js (>= 18)
-
-### Run the server
+### Run the multiplayer server
 
 ```bash
 cd server
@@ -71,47 +60,50 @@ npm install
 npm start
 ```
 
-The server listens on `ws://localhost:8080` by default. Set the `PORT`
-environment variable to use a different port.
-
-### Run server tests
-
-```bash
-cd server
-npm test
-```
+Listens on `ws://localhost:8080` by default (`PORT` env var overrides it).
+The app connects to the server only for multiplayer battles; single-player,
+daily, and stats all work offline.
 
 ### How to play multiplayer
 
-1. Start the server and the Flutter app.
-2. On one device, tap **Multiplayer**, enter a name, and tap **Create room**.
-3. Share the 6-letter room code with a friend.
-4. On the other device, tap **Multiplayer**, enter the code, and tap **Join room**.
-5. Both players get the same scrambled word each round and race to solve it.
+1. Start the server and the app.
+2. Device A: **Multiplayer** → name → **Create room** → share the code.
+3. Device B: **Multiplayer** → name + code → **Join room**.
+4. Both players get the same scrambled word each round and race to solve it.
+   Scores and the winner come from the server.
+
+## Protocol
+
+Client → server: `create_room`, `join_room`, `submit_answer`, `next_round`
+
+Server → client: `room_created`, `room_joined`, `match_started`, `new_word`,
+`opponent_scored`, `game_over`, `player_left`, `error`
 
 ## Project Structure
 
 ```
 lib/
-├── core/                    # Shared utilities
-│   ├── theme/               # Custom light/dark theme
-│   ├── constants/           # Colors, spacing, game rules
-│   └── router/              # go_router configuration
-├── features/                # Feature-first modules
-│   ├── word_scramble/       # Core gameplay
-│   │   ├── data/            # Word data source + repository
-│   │   ├── domain/          # Models, scoring, scramble logic
-│   │   └── presentation/    # Providers, screens, widgets
+├── core/                    # Theme, constants, router
+├── features/
+│   ├── word_scramble/       # Classic + daily gameplay
+│   ├── multiplayer/         # Lobby + battle screens, socket layer
 │   ├── home/                # Landing screen
-│   ├── multiplayer/         # Online battles (lobby + battle screens)
 │   ├── stats/               # Lifetime statistics
 │   └── settings/            # Theme preference
-├── shared/                  # Shared widgets
-└── main.dart
+└── shared/                  # Shared widgets
+server/
+├── src/
+│   ├── index.js             # WebSocket entry + message handling
+│   ├── rooms.js             # Room matchmaking
+│   ├── game.js              # Match + round logic
+│   └── words.js             # Word database
+└── test/
+    └── rooms.test.js
 ```
 
 ## Testing
 
-- `test/features/word_scramble/domain/game_logic_test.dart` - scoring + scramble
-- `test/features/word_scramble/presentation/providers/game_provider_test.dart` - game flow
-- `test/features/stats/domain/game_stats_test.dart` - stats merging
+```bash
+flutter test   # 25 tests: scoring, scramble, game flow, multiplayer, daily
+cd server && npm test   # 7 tests: match logic, rooms
+```
