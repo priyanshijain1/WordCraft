@@ -1,0 +1,39 @@
+# Planning docs - keep out of git
+AGENTS.md
+PRD.md
+PROJECT_PLAN.md
+
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter_web_build/
+!packages/flutter_web_plugins/
+pubspec.lock
+pubspec.overrides.yaml
+*.iml
+.gradle/
+local.properties
+*.keystore
+*.jks
+**/*.jks
+**/*.keystore
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
