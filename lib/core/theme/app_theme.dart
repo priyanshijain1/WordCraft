@@ -31,10 +31,13 @@ class AppTheme {
   }
 
   static ThemeData _base(ColorScheme colorScheme) {
+    final baseTextTheme = colorScheme.brightness == Brightness.dark
+        ? ThemeData.dark().textTheme
+        : ThemeData.light().textTheme;
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      textTheme: GoogleFonts.poppinsTextTheme(baseTextTheme),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(
@@ -64,6 +67,7 @@ class AppTheme {
         titleTextStyle: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w700,
+          color: colorScheme.onSurface,
         ),
       ),
     );
