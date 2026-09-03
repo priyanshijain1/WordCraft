@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/constants/app_constants.dart';
-import '../../../core/router/app_router.dart';
-import '../../../shared/widgets/letter_tile_widget.dart';
-import '../../../shared/widgets/timer_display.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../shared/widgets/letter_tile_widget.dart';
+import '../../../../shared/widgets/timer_display.dart';
 import '../providers/game_provider.dart';
 
 class GameScreen extends ConsumerStatefulWidget {

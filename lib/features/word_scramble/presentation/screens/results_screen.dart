@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/constants/app_constants.dart';
-import '../../../core/router/app_router.dart';
-import '../../stats/presentation/providers/stats_providers.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../stats/presentation/providers/stats_providers.dart';
+import '../../domain/models/game_state.dart';
 import '../providers/game_provider.dart';
 
 class ResultsScreen extends ConsumerStatefulWidget {

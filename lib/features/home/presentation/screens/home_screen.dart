@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/constants/app_constants.dart';
-import '../../../core/router/app_router.dart';
-import '../../word_scramble/presentation/providers/game_provider.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../word_scramble/presentation/providers/game_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

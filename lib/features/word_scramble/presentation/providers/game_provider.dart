@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/constants/app_constants.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/word.dart';
+import '../../domain/repositories/word_repository.dart';
 import '../../domain/usecases/scoring_engine.dart';
 import '../../domain/usecases/scramble_engine.dart';
 import '../providers/round_input.dart';
@@ -196,7 +197,7 @@ class GameProvider extends Notifier<GameSession> {
       final finished = updated.copyWith(status: won ? GameStatus.won : GameStatus.lost);
       state = GameSession(
         game: finished,
-        input: RoundInput(),
+        input: const RoundInput(),
         secondsLeft: 0,
       );
       return;

@@ -1,4 +1,4 @@
-import '../../../core/constants/app_constants.dart';
+import '../../../../core/constants/app_constants.dart';
 
 /// Calculates scores for a word scramble game.
 ///

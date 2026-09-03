@@ -26,7 +26,7 @@ class StatsNotifier extends AsyncNotifier<GameStats> {
     required int timeMs,
   }) async {
     final repo = await ref.read(statsRepositoryProvider.future);
-    final current = value ?? const GameStats();
+    final current = state.value ?? const GameStats();
     final merged = current.mergeGame(
       score: score,
       wordsFound: wordsFound,
