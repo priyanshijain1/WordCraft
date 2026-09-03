@@ -51,7 +51,11 @@ class _LetterTileState extends State<LetterTile>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.isSelected != widget.isSelected ||
         oldWidget.revealed != widget.revealed) {
-      _controller.forward(from: 0);
+      _controller.forward(from: 0).then((_) {
+        if (mounted) {
+          _controller.reverse();
+        }
+      });
     }
   }
 
