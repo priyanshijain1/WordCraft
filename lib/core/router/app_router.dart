@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/multiplayer/presentation/screens/battle_screen.dart';
+import '../../features/multiplayer/presentation/screens/lobby_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../../features/stats/presentation/screens/stats_screen.dart';
 import '../../features/word_scramble/presentation/screens/game_screen.dart';
@@ -12,6 +14,8 @@ abstract final class AppRoutes {
   static const results = '/results';
   static const stats = '/stats';
   static const settings = '/settings';
+  static const lobby = '/lobby';
+  static const battle = '/battle';
 }
 
 abstract final class AppRouter {
@@ -42,6 +46,16 @@ abstract final class AppRouter {
         path: AppRoutes.settings,
         name: 'settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.lobby,
+        name: 'lobby',
+        builder: (context, state) => const LobbyScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.battle,
+        name: 'battle',
+        builder: (context, state) => const BattleScreen(),
       ),
     ],
   );
