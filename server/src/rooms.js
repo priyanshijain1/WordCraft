@@ -32,7 +32,7 @@ class RoomManager {
     if (!room) {
       return null;
     }
-    if (room.sockets.size >= 2) {
+    if (room.match.players.size >= 2) {
       return 'full';
     }
     room.match.addPlayer(guestId, guestName);
