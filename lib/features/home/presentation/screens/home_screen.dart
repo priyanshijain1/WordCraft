@@ -49,6 +49,12 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               _ModeButton(
+                label: 'Multiplayer',
+                icon: Icons.people,
+                onTap: () => context.go(AppRoutes.lobby),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              _ModeButton(
                 label: 'Stats',
                 icon: Icons.bar_chart,
                 onTap: () => context.go(AppRoutes.stats),
