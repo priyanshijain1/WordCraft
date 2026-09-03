@@ -1,0 +1,15 @@
+{
+  "name": "wordcraft-server",
+  "version": "1.0.0",
+  "description": "WebSocket server for WordCraft multiplayer",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "ws": "^8.21.3"
+  }
+}
