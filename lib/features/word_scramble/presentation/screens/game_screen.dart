@@ -93,7 +93,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         children: [
           TimerDisplay(
             secondsLeft: session.secondsLeft,
-            totalSeconds: 30,
+            totalSeconds: GameConstants.timePerWord.inSeconds,
           ),
           const Spacer(),
           _ScorePill(label: 'Score', value: '${session.game.score}'),

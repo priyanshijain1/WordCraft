@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/word.dart';
 import '../../domain/usecases/scoring_engine.dart';
@@ -60,7 +61,7 @@ class GameProvider extends Notifier<GameSession> {
 
   /// Starts a new game from the given category (or any).
   void startGame({WordCategory? category, int words = 0}) {
-    final count = words > 0 ? words : 8;
+    final count = words > 0 ? words : GameConstants.wordsPerGame;
     final wordsList = _repo.getWords(count: count, category: category);
     final game = GameState(
       words: wordsList,
@@ -77,7 +78,7 @@ class GameProvider extends Notifier<GameSession> {
     state = GameSession(
       game: game,
       input: RoundInput(letters: game.currentScrambled),
-      secondsLeft: 30,
+      secondsLeft: GameConstants.timePerWord.inSeconds,
     );
   }
 
@@ -212,7 +213,7 @@ class GameProvider extends Notifier<GameSession> {
     state = GameSession(
       game: advanced,
       input: RoundInput(letters: scrambled),
-      secondsLeft: 30,
+      secondsLeft: GameConstants.timePerWord.inSeconds,
     );
   }
 }
