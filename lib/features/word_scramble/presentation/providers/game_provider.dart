@@ -4,6 +4,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/word.dart';
 import '../../domain/repositories/word_repository.dart';
+import '../../domain/usecases/daily_challenge.dart';
 import '../../domain/usecases/scoring_engine.dart';
 import '../../domain/usecases/scramble_engine.dart';
 import '../providers/round_input.dart';
@@ -61,9 +62,10 @@ class GameProvider extends Notifier<GameSession> {
   ScoringEngine get _scoring => ref.read(scoringEngineProvider);
 
   /// Starts a new game from the given category (or any).
-  void startGame({WordCategory? category, int words = 0}) {
+  void startGame({WordCategory? category, int words = 0, int? seed}) {
     final count = words > 0 ? words : GameConstants.wordsPerGame;
-    final wordsList = _repo.getWords(count: count, category: category);
+    final wordsList =
+        _repo.getWords(count: count, category: category, seed: seed);
     final game = GameState(
       words: wordsList,
       roundIndex: 0,
@@ -81,6 +83,11 @@ class GameProvider extends Notifier<GameSession> {
       input: RoundInput(letters: game.currentScrambled),
       secondsLeft: GameConstants.timePerWord.inSeconds,
     );
+  }
+
+  /// Starts the daily challenge: same short puzzle for everyone today.
+  void startDailyGame({DateTime? date}) {
+    startGame(words: DailyChallenge.wordCount, seed: DailyChallenge.seedFor(date));
   }
 
   /// Taps a scrambled letter by its index.

@@ -55,6 +55,15 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               _ModeButton(
+                label: 'Daily Challenge',
+                icon: Icons.calendar_today,
+                onTap: () {
+                  ref.read(gameProvider.notifier).startDailyGame();
+                  context.go(AppRoutes.game);
+                },
+              ),
+              const SizedBox(height: AppSpacing.md),
+              _ModeButton(
                 label: 'Stats',
                 icon: Icons.bar_chart,
                 onTap: () => context.go(AppRoutes.stats),
