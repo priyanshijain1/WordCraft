@@ -9,7 +9,11 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 /// incoming messages as a broadcast stream of decoded maps.
 class MultiplayerDataSource {
   MultiplayerDataSource({String? url})
-      : url = url ?? 'ws://localhost:8080';
+      : url = url ??
+            const String.fromEnvironment(
+              'SERVER_URL',
+              defaultValue: 'ws://localhost:8080',
+            );
 
   final String url;
   WebSocketChannel? _channel;
