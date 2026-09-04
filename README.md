@@ -1,16 +1,18 @@
-# WordCraft
+<h1 align = "center"> WordCraft</h1>
 
-**Play live: https://priyanshijain1.github.io/WordCraft/**
-
-![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)
-![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart)
-![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)
-![Platform](https://img.shields.io/badge/platform-Web-blue)
-![Multiplayer](https://img.shields.io/badge/multiplayer-WebSocket-orange)
+<p align = "center">
+   <img src="https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter"/>
+   <img src="https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart"/>
+   <img src="https://img.shields.io/badge/Node.js-22-339933?logo=node.js"/>
+   <img src="https://img.shields.io/badge/platform-Web-blue"/>
+   <img src="https://img.shields.io/badge/multiplayer-WebSocket-orange"/>
+</p>
 
 A real-time multiplayer word scramble game. Unscramble letters against the
 clock, build streaks, take on the daily puzzle, or battle a friend live over
 WebSockets.
+
+**Play live: https://priyanshijain1.github.io/WordCraft/**
 
 ## Features
 
