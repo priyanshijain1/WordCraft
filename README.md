@@ -1,5 +1,7 @@
 # WordCraft
 
+**Play live: https://priyanshijain1.github.io/WordCraft/** (multiplayer server: `wss://wordcraft-9oni.onrender.com`)
+
 ![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart)
 ![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)
